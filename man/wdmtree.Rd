@@ -58,6 +58,7 @@ The R Journal, 6(1), 49-56.
 \examples{
 ## generate example dataset, fix seed for reproducability
 set.seed(1)
+
 ## generate some random data
 d1 <- rwiener(100, 2,.3,.5,2)
 d2 <- rwiener(100, 2,.3,.5,0)
