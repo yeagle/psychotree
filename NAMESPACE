@@ -19,6 +19,7 @@ export(
   "rstree",
   "pctree",
   "bttree",
+  "wdmtree",
   "mpttree",
 
   ## panel-generating visualization functions
@@ -53,6 +54,9 @@ S3method("plot", "bttree")
 S3method("predict", "bttree")
 S3method("print", "bttree")
 S3method("itempar", "bttree")
+
+## methods for wdmtree objects
+S3method("print", "wdmtree")
 
 ## methods for mpttree objects
 S3method("plot", "mpttree")
