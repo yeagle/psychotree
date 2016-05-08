@@ -4,7 +4,8 @@ import(
   "graphics",
   "psychotools",
   "partykit",
-  "Formula"
+  "Formula",
+  "RWiener"
 )
 importFrom("grid",
   "gpar", "grid.layout", "unit",
@@ -12,6 +13,8 @@ importFrom("grid",
   "grid.rect", "grid.text", "grid.xaxis", "grid.yaxis",
   "popViewport", "pushViewport", "upViewport", "viewport"
 )
+importFrom("grDevices", 
+  "extendrange", "gray.colors")
 
 export(
   ## trees

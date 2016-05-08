@@ -1,7 +1,6 @@
 \name{wdmtree}
 
 \alias{wdmtree}
-
 \alias{print.wdmtree}
 
 \title{Wiener Diffusion Tree Models}
@@ -11,9 +10,9 @@
 }
 
 \usage{
-wdmtree(formula, data, na.action, cluster, \dots)
+wdmtree(formula, data, na.action, cluster, control=mob_control(), ...)
 
-\method{print}{wdmtree}(object, \dots)
+%\method{print}{wdmtree}(object, \dots)
 }
 
 \arguments{
@@ -28,11 +27,12 @@ wdmtree(formula, data, na.action, cluster, \dots)
   \item{cluster}{optional vector (typically numeric or factor) with a
     cluster ID to be employed for clustered covariances in the parameter
     stability tests.}
+  \item{control}{takes \code{mob_control(\ldots)} as argument}
   \item{\dots}{Additional arguments passed to the \code{fit} function:
   \code{wdm.alpha}, \code{wdm.tau}, \code{wdm.beta}, \code{wdm.delta} (to
   fix the corresponding parameter of the Wiener Diffusion model to a
   spesific value).}
-  \item{object}{fitted model object of class \code{"wdmtree"}.}
+  %\item{object}{fitted model object of class \code{"wdmtree"}.}
 }
 
 \details{
@@ -70,7 +70,7 @@ d3$group <- factor('g3', levels=c('g1', 'g2', 'g3'))
 ## bind to one data.frame
 dat <- rbind(d1,d2,d3)
 ## add reshaped dependent variable to dataset (y as single variable)
-dat$y <- reshape.wiener(dat[,1:2])
+dat$y <- reshape(dat[,1:2], direction="wide")
 ## restructre data (columns "q" and "resp" are redundant)
 dat <- dat[,c("y", "q", "resp", "group")]
 
