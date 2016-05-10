@@ -1,11 +1,16 @@
 ## imported packages (with generics etc.)
 import(
-  "stats",
   "graphics",
   "psychotools",
   "partykit",
-  "Formula",
-  "RWiener"
+  "Formula"
+)
+importFrom("stats", 
+  "coef", "model.frame", "predict", "setNames")
+importFrom("RWiener", 
+  "wdm", "as.wiener", "estfun.wdm",
+  "reshape", "reshape.default", 
+  "reshape.data.wiener", "reshape.numdata.wiener"
 )
 importFrom("grid",
   "gpar", "grid.layout", "unit",
