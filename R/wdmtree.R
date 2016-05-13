@@ -23,7 +23,7 @@ wdmfit <- function(y, x = NULL, start = NULL, weights = NULL, offset = NULL,
   est <- RWiener::wdm(y, 
     alpha=wdm.alpha, tau=wdm.tau, beta=wdm.beta, delta=wdm.delta)
   res <- list(
-    coefficients = est$par,
+    coefficients = est$coefficients,
     objfun = -est$loglik,
     estfun = if(estfun) RWiener::estfun.wdm(est) else NULL, 
     object = if(object) est else NULL
