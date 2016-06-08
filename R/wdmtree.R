@@ -25,9 +25,19 @@ wdmfit <- function(y, x = NULL, start = NULL, weights = NULL, offset = NULL,
   res <- list(
     coefficients = est$coefficients,
     objfun = -est$loglik,
-    estfun = if(estfun) RWiener::estfun.wdm(est) else NULL, 
+    estfun = if(estfun) estfun.wdmtree(est) else NULL, 
     object = if(object) est else NULL
   )
+  return(res)
+}
+
+## estfun.wdm wrapper to aggregate scores by id, if id column is given
+estfun.wdmtree <- function(x, ...) {
+  res <- RWiener::estfun.wdm(x)
+  if("id" %in% names(x$data)) {
+    res <- cbind(res, id=x$data$id)
+    res <- aggregate(. ~ id, sum, data=as.data.frame(res))[,-1]
+  }
   return(res)
 }
 

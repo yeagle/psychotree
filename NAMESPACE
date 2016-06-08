@@ -6,7 +6,7 @@ import(
   "Formula"
 )
 importFrom("stats", 
-  "coef", "model.frame", "predict", "setNames")
+  "coef", "model.frame", "predict", "setNames", "aggregate")
 importFrom("RWiener", 
   "wdm", "as.wiener", "estfun.wdm",
   "reshape", "reshape.default", 
