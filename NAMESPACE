@@ -8,9 +8,8 @@ import(
 importFrom("stats", 
   "coef", "model.frame", "predict", "setNames", "aggregate")
 importFrom("RWiener", 
-  "wdm", "as.wiener", "estfun.wdm",
-  "reshape", "reshape.default", 
-  "reshape.data.wiener", "reshape.numdata.wiener"
+  "wdm", "as.wiener", "scorefun.wdm",
+  "revamp", "revamp.data.wiener", "revamp.numdata.wiener"
 )
 importFrom("grid",
   "gpar", "grid.layout", "unit",

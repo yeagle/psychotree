@@ -69,8 +69,8 @@ d2$group <- factor('g2', levels=c('g1', 'g2', 'g3'))
 d3$group <- factor('g3', levels=c('g1', 'g2', 'g3'))
 ## bind to one data.frame
 dat <- rbind(d1,d2,d3)
-## add reshaped dependent variable to dataset (y as single variable)
-dat$y <- reshape(dat[,1:2], direction="wide")
+## add revamped (reshaped) dependent variable to dataset (y as single variable)
+dat$y <- revamp(dat[,1:2], direction="wide")
 ## restructre data (columns "q" and "resp" are redundant)
 dat <- dat[,c("y", "q", "resp", "group")]
 
