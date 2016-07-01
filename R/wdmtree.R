@@ -20,24 +20,14 @@ wdmfit <- function(y, x = NULL, start = NULL, weights = NULL, offset = NULL,
   wdm.alpha=NULL, wdm.tau=NULL, wdm.beta=NULL, wdm.delta=NULL)
 {
   y <- RWiener::as.wiener(y)
-  est <- RWiener::wdm(y, 
-    alpha=wdm.alpha, tau=wdm.tau, beta=wdm.beta, delta=wdm.delta)
+  est <- RWiener::wdm(y, alpha=wdm.alpha, tau=wdm.tau, beta=wdm.beta,
+           delta=wdm.delta)
   res <- list(
     coefficients = est$coefficients,
     objfun = -est$loglik,
-    estfun = if(estfun) estfun.wdmtree(est) else NULL, 
+    estfun = if(estfun) RWiener::scorefun(est) else NULL, 
     object = if(object) est else NULL
   )
-  return(res)
-}
-
-## estfun.wdm wrapper to aggregate scores by id, if id column is given
-estfun.wdmtree <- function(x, ...) {
-  res <- RWiener::scorefun.wdm(x)
-  if("id" %in% names(x$data)) {
-    res <- cbind(res, id=x$data$id)
-    res <- aggregate(. ~ id, sum, data=as.data.frame(res))[,-1]
-  }
   return(res)
 }
 

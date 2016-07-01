@@ -60,26 +60,35 @@ The R Journal, 6(1), 49-56.
 set.seed(1)
 
 ## generate some random data
-d1 <- rwiener(100, 2,.3,.5,2)
-d2 <- rwiener(100, 2,.3,.5,0)
-d3 <- rwiener(100, 2,.3,.5,-2)
-## add group identification to data
-d1$group <- factor('g1', levels=c('g1', 'g2', 'g3'))
-d2$group <- factor('g2', levels=c('g1', 'g2', 'g3'))
-d3$group <- factor('g3', levels=c('g1', 'g2', 'g3'))
-## bind to one data.frame
-dat <- rbind(d1,d2,d3)
-## add revamped (reshaped) dependent variable to dataset (y as single variable)
-dat$y <- revamp(dat[,1:2], direction="wide")
-## restructre data (columns "q" and "resp" are redundant)
-dat <- dat[,c("y", "q", "resp", "group")]
+n <- 10
+dat <- NULL
+delta <- runif(n,-2,2)
+for (i in 1:n) {
+  
+  if (i\%\%2 == 0) {
+    age <- round(runif(1,20,30))
+    delta <- 1
+  }
+  else {
+    age <- round(runif(1,30,60))
+    delta <- -1
+  }
+
+  if (i > 7) delta <- 2
+  
+  rw <- rwiener(100,2,.3,.5, delta)
+
+  if(is.null(dat)) dat <- cbind(rw, age, id=as.factor(i))
+  else dat <- rbind(dat, cbind(rw, age, id=as.factor(i)))
+}
+dat <- as.wiener(dat)
+dat$group <- factor(1, levels=c(1,2))
+dat$group[as.numeric(dat$id) > 7] <- factor(2, levels=c(1,2))
+dat$y <- revamp(dat)
 
 ## wdmtree function call
-wdmtree1 <- wdmtree(y~group,dat)
-# alternative call: wdmtree1 <- wdmtree(y~1|group,dat)
+wdmtree1 <- wdmtree(y~age+group, dat, cluster=id)
 
-## wdmtree function call with alpha, tau, beta parameters fixed
-wdmtree2 <- wdmtree(y~group,dat, wdm.alpha=2, wdm.tau=.3, wdm.beta=.5)
 }
 
 \keyword{tree}
